@@ -97,31 +97,31 @@ void driveR(int val)
 void pidDrive(float target) //CREDIT Jason McKinney (modified gyroTurn for pidDrive)
 
 {
-		/*These two statements are what we tune during PID Loop tuning
-		there's 1 for each drive train side, and pidInit is a function in
-		PIDController.h
-		to tune, we specify which PID Struct we are tuning (declared above)
-		Then, each of first 3 arguments is a constant. First, kP, then kI, last KD
-		After those 3 there is 1 more term, epsilon.
-		Epsilon is used similar to an integral cap, and will stop summing the
-		error once your are in range of the setpoint. The value you choose for
-		epsilon tells the controller what range it will stop summing error within
-		(so 1 degree off of target, 2, etc.).
-		*/
+	/*These two statements are what we tune during PID Loop tuning
+	there's 1 for each drive train side, and pidInit is a function in
+	PIDController.h
+	to tune, we specify which PID Struct we are tuning (declared above)
+	Then, each of first 3 arguments is a constant. First, kP, then kI, last KD
+	After those 3 there is 1 more term, epsilon.
+	Epsilon is used similar to an integral cap, and will stop summing the
+	error once your are in range of the setpoint. The value you choose for
+	epsilon tells the controller what range it will stop summing error within
+	(so 1 degree off of target, 2, etc.).
+	*/
 
-		pidInit(drivePidL, 1.1, 0.015, 0.2, 1);
-		pidInit(drivePidR, 1.1, 0.015, 0.2, 1);
+	pidInit(drivePidL, 1.1, 0.015, 0.2, 1);
+	pidInit(drivePidR, 1.1, 0.015, 0.2, 1);
 
-		//resetting the motor encoders
-		resetMotorEncoder(driveTrainLeft);
-		resetMotorEncoder(driveTrainRight);
+	//resetting the motor encoders
+	resetMotorEncoder(driveTrainLeft);
+	resetMotorEncoder(driveTrainRight);
 
-		//setting variables we'll use later
-		bool atDestination = false;
-		long atTargetTime = nPgmTime;
-		long timer = nPgmTime;
-		float degreesTravelledL = 0;
-		float degreesTravelledR = 0;
+	//setting variables we'll use later
+	bool atDestination = false;
+	long atTargetTime = nPgmTime;
+	long timer = nPgmTime;
+	float degreesTravelledL = 0;
+	float degreesTravelledR = 0;
 
 	while(!atDestination)
 	{
@@ -168,17 +168,17 @@ void pidDrive(float target) //CREDIT Jason McKinney (modified gyroTurn for pidDr
 void gyroTurn(float target) //DO NOT USE GYRO TURNS LESS THAN 20 degrees
 {
 
-		/*These pidInit statements are what we tune during PID Loop tuning
-		there's 1 for various differnt target ranges. pidInit is a function in
-		PIDController.h
-		To tune, we specify which PID Struct we are tuning (declared above)
-		Then, each of first 3 arguments is a constant. First, kP, then kI, last KD
-		After those 3 there is 1 more term, epsilon.
-		Epsilon is used similar to an integral cap, and will stop summing the
-		error once your are in range of the setpoint. The value you choose for
-		epsilon tells the controller what range it will stop summing error within
-		(so 1 degree off of target, 2, etc.).
-		*/
+	/*These pidInit statements are what we tune during PID Loop tuning
+	there's 1 for various differnt target ranges. pidInit is a function in
+	PIDController.h
+	To tune, we specify which PID Struct we are tuning (declared above)
+	Then, each of first 3 arguments is a constant. First, kP, then kI, last KD
+	After those 3 there is 1 more term, epsilon.
+	Epsilon is used similar to an integral cap, and will stop summing the
+	error once your are in range of the setpoint. The value you choose for
+	epsilon tells the controller what range it will stop summing error within
+	(so 1 degree off of target, 2, etc.).
+	*/
 
 	//various gyro pid "ranges" Different pid constants handle different degree turns better/worse (without integral).
 	if(abs(target) >= 80 )
